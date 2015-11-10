@@ -52,6 +52,7 @@ console.log (rightCover);
 
 var first = document.getElementById('left');
 var second = document.getElementById('right');
+var next = document.getElementById('nextbattle');
 
 //This method puts the images and album titles into HTML
 Tracker.prototype.displayPhotos = function () {
@@ -82,7 +83,39 @@ Tracker.prototype.rightWins = function(event) {
     console.log(rightCover.name + " has " + rightCover.votes + " votes.");
 }
 
-first.addEventListener('click', rapBattle.leftWins); //If the left image is clicked it runs the leftWins method
-second.addEventListener("click", rapBattle.rightWins); //If the left image is clicked it runs the leftWins method
+var newRapBattle = function () {
+  leftCover = photoArray[rapBattle.getRandomPhoto()];
+  rightCover = photoArray[rapBattle.getRandomPhoto()];
+
+  while (leftCover === rightCover) {
+    rightCover = photoArray[rapBattle.getRandomPhoto()];
+    leftCover = photoArray[rapBattle.getRandomPhoto()];
+  }
+  // first.parentNode.removeChild('img src');
+  var leftPhoto = document.createElement('img');
+  var leftTitle = document.getElementById('leftName');
+  leftPhoto.src = leftCover.path;
+  first.appendChild(leftPhoto);
+  leftTitle.innerHTML = leftCover.name;
+  // first.innerHTML = 'img src =' + leftCover.path;
+
+  // second.parentNode.removeChild('img src');
+  var rightPhoto = document.createElement('img');
+  var rightTitle = document.getElementById('rightName');
+  rightPhoto.src = rightCover.path;
+  second.appendChild(rightPhoto);
+  rightTitle.innerHTML = rightCover.name;
+
+  console.log (leftCover);
+  console.log (rightCover);
+}
 
 rapBattle.displayPhotos();
+
+first.addEventListener('click', rapBattle.leftWins); //If the left image is clicked it runs the leftWins method
+second.addEventListener("click", rapBattle.rightWins); //If the left image is clicked it runs the leftWins method
+next.addEventListener("click", newRapBattle);
+
+
+
+
