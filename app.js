@@ -59,12 +59,14 @@ Tracker.prototype.displayPhotos = function () {
   var leftPhoto = document.createElement('img');
   var leftTitle = document.getElementById('leftName');
   leftPhoto.src = leftCover.path;
+  leftPhoto.id = 'left1';
   first.appendChild(leftPhoto);
   leftTitle.innerHTML = leftCover.name;
 
   var rightPhoto = document.createElement('img');
   var rightTitle = document.getElementById('rightName');
   rightPhoto.src = rightCover.path;
+  rightPhoto.id = 'right1';
   second.appendChild(rightPhoto);
   rightTitle.innerHTML = rightCover.name;
 }
@@ -77,10 +79,17 @@ Tracker.prototype.leftWins = function(event) {
 }
 
 Tracker.prototype.rightWins = function(event) {
-    event.preventDefault();
-    event.target.style.outline = "solid red 5px";
-    rightCover.votes += 1;
-    console.log(rightCover.name + " has " + rightCover.votes + " votes.");
+  event.preventDefault();
+  event.target.style.outline = "solid red 5px";
+  rightCover.votes += 1;
+  console.log(rightCover.name + " has " + rightCover.votes + " votes.");
+}
+
+Tracker.prototype.clearHighlight = function(event) {
+  event.preventDefault();
+  event.target.style.outline = "none";
+
+
 }
 
 var newRapBattle = function () {
@@ -91,20 +100,19 @@ var newRapBattle = function () {
     rightCover = photoArray[rapBattle.getRandomPhoto()];
     leftCover = photoArray[rapBattle.getRandomPhoto()];
   }
-  // first.parentNode.removeChild('img src');
-  var leftPhoto = document.createElement('img');
-  var leftTitle = document.getElementById('leftName');
-  leftPhoto.src = leftCover.path;
-  first.appendChild(leftPhoto);
-  leftTitle.innerHTML = leftCover.name;
-  // first.innerHTML = 'img src =' + leftCover.path;
 
-  // second.parentNode.removeChild('img src');
-  var rightPhoto = document.createElement('img');
+  var left1 = document.getElementById('left1');
+  var leftTitle = document.getElementById('leftName');
+  left1.src = leftCover.path;
+  leftTitle.innerHTML = leftCover.name;
+
+  var right1 = document.getElementById('right1');
   var rightTitle = document.getElementById('rightName');
-  rightPhoto.src = rightCover.path;
-  second.appendChild(rightPhoto);
+  right1.src = rightCover.path;
   rightTitle.innerHTML = rightCover.name;
+
+  first.addEventListener("click", rapBattle.clearHighlight);
+  second.addEventListener("click", rapBattle.clearHighlight);
 
   console.log (leftCover);
   console.log (rightCover);
@@ -112,9 +120,9 @@ var newRapBattle = function () {
 
 rapBattle.displayPhotos();
 
-first.addEventListener('click', rapBattle.leftWins); //If the left image is clicked it runs the leftWins method
+first.addEventListener("click", rapBattle.leftWins); //If the left image is clicked it runs the leftWins method
 second.addEventListener("click", rapBattle.rightWins); //If the left image is clicked it runs the leftWins method
-next.addEventListener("click", newRapBattle);
+next.addEventListener("click", newRapBattle, rapBattle.clearHighlight);
 
 
 
