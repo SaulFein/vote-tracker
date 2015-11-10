@@ -76,6 +76,7 @@ Tracker.prototype.leftWins = function(event) {
   event.target.style.outline = "solid blue 5px";//This adds a blue border to left cover if clicked
     leftCover.votes += 1; //This gives that cover 1 vote.
     console.log(leftCover.name + " has " + leftCover.votes + " votes.");
+    displayChart();
 }
 
 Tracker.prototype.rightWins = function(event) {
@@ -83,6 +84,7 @@ Tracker.prototype.rightWins = function(event) {
   event.target.style.outline = "solid red 5px";
   rightCover.votes += 1;
   console.log(rightCover.name + " has " + rightCover.votes + " votes.");
+  displayChart();
 }
 
 Tracker.prototype.clearHighlight = function(event) {
@@ -111,9 +113,9 @@ var newRapBattle = function () {
   right1.src = rightCover.path;
   rightTitle.innerHTML = rightCover.name;
 
-  first.addEventListener("click", rapBattle.clearHighlight);
+ /* first.addEventListener("click", rapBattle.clearHighlight);
   second.addEventListener("click", rapBattle.clearHighlight);
-
+*/
   console.log (leftCover);
   console.log (rightCover);
 }
@@ -124,6 +126,34 @@ first.addEventListener("click", rapBattle.leftWins); //If the left image is clic
 second.addEventListener("click", rapBattle.rightWins); //If the left image is clicked it runs the leftWins method
 next.addEventListener("click", newRapBattle, rapBattle.clearHighlight);
 
+var displayChart = function() {
 
+var ctx = document.getElementById("myChart").getContext("2d");
 
+// var myPieChart = new Chart(ctx[0]).Pie(data,options);
 
+var data = [
+    {
+        value: leftCover.votes,
+        color: "#46BFBD",
+        highlight: "#FF5A5E",
+        label: "Blue"
+    },
+    {
+        value: rightCover.votes,
+        color: "#F7464A",
+        highlight: "#5AD3D1",
+        label: "Red"
+    },
+];
+
+var pieOptions = {
+  segmentShowStroke : false,
+  animateScale : true
+}
+
+var myNewChart = new Chart(ctx).Pie(data,pieOptions);
+
+}
+
+displayChart();
