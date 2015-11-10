@@ -1,28 +1,14 @@
-//
-
-
-
-// var img = document.createElement("img");
-// var img2 = document.createElement("img");
-
-// img.src = "img/cap.jpg";
-// img2.src = "img/enter36.jpg";
-
-// var src = document.getElementById("left");
-// var src2 = document.getElementById("right");
-
-// src.appendChild(img);
-// src.appendChild(img2);
 'use strict'
 
-function Photo (name, path) {
+function Photo (name, path) { //object constructor for images
   this.name = name;
   this.path = path;
   this.votes = 0;
   // photoArray.push(this);
 }
 
-var allEyes = new Photo ("2Pac - All Eyes On Me", "img/alleyes.jpg");
+//Creation of new Photo objects. One for each image.
+var allEyez = new Photo ("2Pac - All Eyes On Me", "img/alleyez.png");
 var cap = new Photo ("Big Pun - Capital Punishment", "img/cap.jpg");
 var daily = new Photo ("Gang Starr - Daily Operation", "img/daily.jpg");
 var doomsday = new Photo ("MF DOOM - DOOMSDAY", "img/doomsday.jpg");
@@ -35,32 +21,39 @@ var ready = new Photo ("The Notorious BIG - Read to Die", "img/ready.jpg");
 var supreme = new Photo ("Ghostface Killah - Supreme Clientele", "img/supreme.jpg");
 var theChronic = new Photo ("Dr. Dre - The Chronic", "img/thechronic.jpg");
 
-var photoArray = [allEyes, cap, daily, doomsday, enter36, illmatic, infamous, license, liquid, ready, supreme, theChronic];
+//Putting each Photo object into an array
+var photoArray = [allEyez, cap, daily, doomsday, enter36, illmatic, infamous, license, liquid, ready, supreme, theChronic];
 
+//Creating the Tracker object
 var Tracker = function() {
-  this.getRandomPhoto = function() {
-    return Math.floor((Math.random() * 12) + 0);
-    //generate a random number to select an image from photoArray
-  };
 }
 
+//This Track method generates a random number to select an image from photoArray
+Tracker.prototype.getRandomPhoto = function() {
+    return Math.floor((Math.random() * 12) + 0);
+  };
+
+//Creating a new Tracker object
 var rapBattle = new Tracker ();
 
+//Declaring left and right cover images by rapBattle.getRandomPhoto() method.
 var leftCover = photoArray[rapBattle.getRandomPhoto()];
 var rightCover = photoArray[rapBattle.getRandomPhoto()];
 
-
+//If the left cover = the right cover it will reassign a new cover to the rightCover
+//and leftCover variables until they are not the same.
 while (leftCover === rightCover) {
   rightCover = photoArray[rapBattle.getRandomPhoto()];
   leftCover = photoArray[rapBattle.getRandomPhoto()];
 }
 
+console.log (leftCover);
+console.log (rightCover);
+
 var first = document.getElementById('left');
 var second = document.getElementById('right');
 
-console.dir (leftCover);
-console.dir (rightCover);
-
+//This method puts the images and album titles into HTML
 Tracker.prototype.displayPhotos = function () {
   var leftPhoto = document.createElement('img');
   var leftTitle = document.getElementById('leftName');
@@ -75,13 +68,10 @@ Tracker.prototype.displayPhotos = function () {
   rightTitle.innerHTML = rightCover.name;
 }
 
-rapBattle.displayPhotos();
-
-
 Tracker.prototype.leftWins = function(event) {
-  event.preventDefault();
-  event.target.style.outline = "solid blue 5px";
-    leftCover.votes += 1;
+  event.preventDefault(); //When the event is triggered by the click it will not reload the page.
+  event.target.style.outline = "solid blue 5px";//This adds a blue border to left cover if clicked
+    leftCover.votes += 1; //This gives that cover 1 vote.
     console.log(leftCover.name + " has " + leftCover.votes + " votes.");
 }
 
@@ -92,6 +82,7 @@ Tracker.prototype.rightWins = function(event) {
     console.log(rightCover.name + " has " + rightCover.votes + " votes.");
 }
 
-first.addEventListener('click', rapBattle.leftWins);
-second.addEventListener("click", rapBattle.rightWins);
+first.addEventListener('click', rapBattle.leftWins); //If the left image is clicked it runs the leftWins method
+second.addEventListener("click", rapBattle.rightWins); //If the left image is clicked it runs the leftWins method
 
+rapBattle.displayPhotos();
