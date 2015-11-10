@@ -18,7 +18,7 @@
 function Photo (name, path) {
   this.name = name;
   this.path = path;
-  this.votes = 0
+  this.votes = 0;
   // photoArray.push(this);
 }
 
@@ -32,7 +32,7 @@ var infamous = new Photo ("Mobb Deep - The Infamous", "img/infamous.jpg");
 var license = new Photo ("Beastie Boys - License to Ill", "img/license.jpg");
 var liquid = new Photo ("GZA - Liquid Swords", "img/liquid.jpg");
 var ready = new Photo ("The Notorious BIG - Read to Die", "img/ready.jpg");
-var supreme = new Photo ("Ghostface Killah - Supreme", "img/supreme.jpg");
+var supreme = new Photo ("Ghostface Killah - Supreme Clientele", "img/supreme.jpg");
 var theChronic = new Photo ("Dr. Dre - The Chronic", "img/thechronic.jpg");
 
 var photoArray = [allEyes, cap, daily, doomsday, enter36, illmatic, infamous, license, liquid, ready, supreme, theChronic];
@@ -46,27 +46,52 @@ var Tracker = function() {
 
 var rapBattle = new Tracker ();
 
-var leftCover = photoArray[rapBattle.getRandomPhoto()].path;
-var rightCover = photoArray[rapBattle.getRandomPhoto()].path;
+var leftCover = photoArray[rapBattle.getRandomPhoto()];
+var rightCover = photoArray[rapBattle.getRandomPhoto()];
+
 
 while (leftCover === rightCover) {
-  rightCover = photoArray[rapBattle.getRandomPhoto()].path;
-  leftCover = photoArray[rapBattle.getRandomPhoto()].path;
+  rightCover = photoArray[rapBattle.getRandomPhoto()];
+  leftCover = photoArray[rapBattle.getRandomPhoto()];
 }
+
+var first = document.getElementById('left');
+var second = document.getElementById('right');
 
 console.dir (leftCover);
 console.dir (rightCover);
 
 Tracker.prototype.displayPhotos = function () {
-  var first = document.getElementById('left');
   var leftPhoto = document.createElement('img');
-  leftPhoto.src = leftCover;
+  var leftTitle = document.getElementById('leftName');
+  leftPhoto.src = leftCover.path;
   first.appendChild(leftPhoto);
+  leftTitle.innerHTML = leftCover.name;
 
-  var second = document.getElementById('right');
   var rightPhoto = document.createElement('img');
-  rightPhoto.src = rightCover;
+  var rightTitle = document.getElementById('rightName');
+  rightPhoto.src = rightCover.path;
   second.appendChild(rightPhoto);
+  rightTitle.innerHTML = rightCover.name;
 }
 
 rapBattle.displayPhotos();
+
+
+Tracker.prototype.leftWins = function(event) {
+  event.preventDefault();
+  event.target.style.outline = "solid blue 5px";
+    leftCover.votes += 1;
+    console.log(leftCover.name + " has " + leftCover.votes + " votes.");
+}
+
+Tracker.prototype.rightWins = function(event) {
+    event.preventDefault();
+    event.target.style.outline = "solid red 5px";
+    rightCover.votes += 1;
+    console.log(rightCover.name + " has " + rightCover.votes + " votes.");
+}
+
+first.addEventListener('click', rapBattle.leftWins);
+second.addEventListener("click", rapBattle.rightWins);
+
