@@ -81,17 +81,11 @@ Tracker.prototype.leftWins = function(event) {
 
 Tracker.prototype.rightWins = function(event) {
   event.preventDefault();
+  console.log(event.target);
   event.target.style.outline = "solid red 5px";
   rightCover.votes += 1;
   console.log(rightCover.name + " has " + rightCover.votes + " votes.");
   displayChart();
-}
-
-Tracker.prototype.clearHighlight = function(event) {
-  event.preventDefault();
-  event.target.style.outline = "none";
-
-
 }
 
 var newRapBattle = function () {
@@ -113,9 +107,9 @@ var newRapBattle = function () {
   right1.src = rightCover.path;
   rightTitle.innerHTML = rightCover.name;
 
- /* first.addEventListener("click", rapBattle.clearHighlight);
-  second.addEventListener("click", rapBattle.clearHighlight);
-*/
+  // first.addEventListener("click", rapBattle.clearHighlight);
+  // second.addEventListener("click", rapBattle.clearHighlight);
+
   console.log (leftCover);
   console.log (rightCover);
 }
@@ -124,13 +118,15 @@ rapBattle.displayPhotos();
 
 first.addEventListener("click", rapBattle.leftWins); //If the left image is clicked it runs the leftWins method
 second.addEventListener("click", rapBattle.rightWins); //If the left image is clicked it runs the leftWins method
-next.addEventListener("click", newRapBattle, rapBattle.clearHighlight);
+next.addEventListener("click", function() {
+  newRapBattle();
+  document.getElementById("right1").removeAttribute('style');
+  document.getElementById("left1").removeAttribute('style');
+});
 
 var displayChart = function() {
 
 var ctx = document.getElementById("myChart").getContext("2d");
-
-// var myPieChart = new Chart(ctx[0]).Pie(data,options);
 
 var data = [
     {
@@ -156,4 +152,3 @@ var myNewChart = new Chart(ctx).Pie(data,pieOptions);
 
 }
 
-displayChart();
