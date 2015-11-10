@@ -107,9 +107,6 @@ var newRapBattle = function () {
   right1.src = rightCover.path;
   rightTitle.innerHTML = rightCover.name;
 
-  // first.addEventListener("click", rapBattle.clearHighlight);
-  // second.addEventListener("click", rapBattle.clearHighlight);
-
   console.log (leftCover);
   console.log (rightCover);
 }
@@ -141,6 +138,7 @@ var data = [
         highlight: "#5AD3D1",
         label: "Red"
     },
+
 ];
 
 var pieOptions = {
