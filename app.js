@@ -24,27 +24,25 @@ var theChronic = new Photo ("Dr. Dre - The Chronic", "img/thechronic.jpg");
 //Putting each Photo object into an array
 var photoArray = [allEyez, cap, daily, doomsday, enter36, illmatic, infamous, license, liquid, ready, supreme, theChronic];
 
-//Creating the Tracker object
-var Tracker = function() {
+//Creating the tracker object
+var tracker = function() {
 }
 
 //This Track method generates a random number to select an image from photoArray
-Tracker.prototype.getRandomPhoto = function() {
+tracker.getRandomPhoto = function() {
     return Math.floor((Math.random() * 12) + 0);
   };
 
-//Creating a new Tracker object
-var rapBattle = new Tracker ();
 
-//Declaring left and right cover images by rapBattle.getRandomPhoto() method.
-var leftCover = photoArray[rapBattle.getRandomPhoto()];
-var rightCover = photoArray[rapBattle.getRandomPhoto()];
+//Declaring left and right cover images by tracker.prototype.getRandomPhoto() method.
+var leftCover = photoArray[tracker.getRandomPhoto()];
+var rightCover = photoArray[tracker.getRandomPhoto()];
 
 //If the left cover = the right cover it will reassign a new cover to the rightCover
 //and leftCover variables until they are not the same.
 while (leftCover === rightCover) {
-  rightCover = photoArray[rapBattle.getRandomPhoto()];
-  leftCover = photoArray[rapBattle.getRandomPhoto()];
+  rightCover = photoArray[tracker.getRandomPhoto()];
+  leftCover = photoArray[tracker.getRandomPhoto()];
 }
 
 console.log (leftCover);
@@ -55,7 +53,7 @@ var second = document.getElementById('right');
 var next = document.getElementById('nextbattle');
 
 //This method puts the images and album titles into HTML
-Tracker.prototype.displayPhotos = function () {
+tracker.displayPhotos = function () {
   var leftPhoto = document.createElement('img');
   var leftTitle = document.getElementById('leftName');
   leftPhoto.src = leftCover.path;
@@ -71,30 +69,29 @@ Tracker.prototype.displayPhotos = function () {
   rightTitle.innerHTML = rightCover.name;
 }
 
-Tracker.prototype.leftWins = function(event) {
+tracker.leftWins = function(event) {
   event.preventDefault(); //When the event is triggered by the click it will not reload the page.
   event.target.style.outline = "solid blue 5px";//This adds a blue border to left cover if clicked
-    leftCover.votes += 1; //This gives that cover 1 vote.
-    console.log(leftCover.name + " has " + leftCover.votes + " votes.");
-    displayChart();
+  leftCover.votes += 1; //This gives that cover 1 vote.
+  console.log(leftCover.name + " has " + leftCover.votes + " votes.");
+  displayChart();// redraws chart after votes have been incremented
 }
 
-Tracker.prototype.rightWins = function(event) {
+tracker.rightWins = function(event) {
   event.preventDefault();
-  // console.log(event.target);
   event.target.style.outline = "solid red 5px";
   rightCover.votes += 1;
   console.log(rightCover.name + " has " + rightCover.votes + " votes.");
-  displayChart();
+  displayChart();// redraws chart after votes have been incremented
 }
 
 var newRapBattle = function () {
-  leftCover = photoArray[rapBattle.getRandomPhoto()];
-  rightCover = photoArray[rapBattle.getRandomPhoto()];
+  leftCover = photoArray[tracker.getRandomPhoto()];
+  rightCover = photoArray[tracker.getRandomPhoto()];
 
   while (leftCover === rightCover) {
-    rightCover = photoArray[rapBattle.getRandomPhoto()];
-    leftCover = photoArray[rapBattle.getRandomPhoto()];
+    rightCover = photoArray[tracker.getRandomPhoto()];
+    // leftCover = photoArray[rapBattle.getRandomPhoto()];
   }
 
   var left1 = document.getElementById('left1');
@@ -111,17 +108,18 @@ var newRapBattle = function () {
   console.log (rightCover);
 }
 
-rapBattle.displayPhotos();
+tracker.displayPhotos();
 
-
-first.addEventListener("click", rapBattle.leftWins); //If the left image is clicked it runs the leftWins method
-second.addEventListener("click", rapBattle.rightWins); //If the left image is clicked it runs the leftWins method
-next.addEventListener("click", function() {
+first.addEventListener("click", tracker.leftWins); //If the left image is clicked it runs the leftWins method
+second.addEventListener("click", tracker.rightWins); //If the left image is clicked it runs the leftWins method
+next.addEventListener("click", function() { // runs newRapBattle function and removes highlighting.
   newRapBattle();
   document.getElementById("right1").removeAttribute('style');
   document.getElementById("left1").removeAttribute('style');
 });
 
+
+//Chart section
 var displayChart = function() {
 
 var ctx = document.getElementById("myChart").getContext("2d");
