@@ -74,6 +74,8 @@ tracker.leftWins = function(event) {
   leftCover.votes += 1; //This gives that cover 1 vote.
   console.log(leftCover.name + " has " + leftCover.votes + " votes.");
   displayChart();// redraws chart after votes have been incremented
+  setTimeout(newRapBattle, 1000);
+  setTimeout(removeHL, 1000);
 }
 
 tracker.rightWins = function(event) {
@@ -82,9 +84,16 @@ tracker.rightWins = function(event) {
   rightCover.votes += 1;
   console.log(rightCover.name + " has " + rightCover.votes + " votes.");
   displayChart();// redraws chart after votes have been incremented
+  setTimeout(newRapBattle, 1000);
+  setTimeout(removeHL, 1000);
 }
-
+var removeHL = function () {
+  document.getElementById("right1").removeAttribute('style');//removes border highlighting
+  document.getElementById("left1").removeAttribute('style');
+}
 var newRapBattle = function () {
+
+
   leftCover = photoArray[tracker.getRandomPhoto()];
   rightCover = photoArray[tracker.getRandomPhoto()];
 
@@ -104,6 +113,8 @@ var newRapBattle = function () {
 
   console.log (leftCover);
   console.log (rightCover);
+
+
 }
 
 tracker.displayPhotos();
@@ -115,12 +126,13 @@ tracker.displayPhotos();
 // }
 
 first.addEventListener("click", tracker.leftWins); //If the left image is clicked it runs the leftWins method
-second.addEventListener("click", tracker.rightWins); //If the left image is clicked it runs the leftWins method
-next.addEventListener("click", function() { // runs newRapBattle function and removes highlighting.
-  newRapBattle();
-  document.getElementById("right1").removeAttribute('style');//removes border highlighting
-  document.getElementById("left1").removeAttribute('style');
-});
+second.addEventListener("click", tracker.rightWins);
+
+//If the left image is clicked it runs the leftWins method
+// next.addEventListener("click", function() { // runs newRapBattle function and removes highlighting.
+//   newRapBattle ();
+
+// });
 
 //Chart section
 var displayChart = function() {
