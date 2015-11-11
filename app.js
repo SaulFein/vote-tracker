@@ -81,7 +81,7 @@ Tracker.prototype.leftWins = function(event) {
 
 Tracker.prototype.rightWins = function(event) {
   event.preventDefault();
-  console.log(event.target);
+  // console.log(event.target);
   event.target.style.outline = "solid red 5px";
   rightCover.votes += 1;
   console.log(rightCover.name + " has " + rightCover.votes + " votes.");
@@ -113,6 +113,7 @@ var newRapBattle = function () {
 
 rapBattle.displayPhotos();
 
+
 first.addEventListener("click", rapBattle.leftWins); //If the left image is clicked it runs the leftWins method
 second.addEventListener("click", rapBattle.rightWins); //If the left image is clicked it runs the leftWins method
 next.addEventListener("click", function() {
@@ -124,19 +125,92 @@ next.addEventListener("click", function() {
 var displayChart = function() {
 
 var ctx = document.getElementById("myChart").getContext("2d");
+var ctx2 = document.getElementById("myChart2").getContext("2d");
 
 var data = [
+    // {
+    //     value: leftCover.votes,
+    //     color: "#46BFBD",
+    //     highlight: "#FF5A5E",
+    //     label: "Blue"
+    // },
+    // {
+    //     value: rightCover.votes,
+    //     color: "#F7464A",
+    //     highlight: "#5AD3D1",
+    //     label: "Red"
+    // },
     {
-        value: leftCover.votes,
-        color: "#46BFBD",
-        highlight: "#FF5A5E",
-        label: "Blue"
+        value: allEyez.votes,
+        color: "red",
+        highlight: "red",
+        label: "allEyez"
     },
     {
-        value: rightCover.votes,
-        color: "#F7464A",
-        highlight: "#5AD3D1",
-        label: "Red"
+        value: cap.votes,
+        color: "blue",
+        highlight: "blue",
+        label: "cap"
+    },
+    {
+        value: daily.votes,
+        color: "green",
+        highlight: "green",
+        label: "daily"
+    },
+    {
+        value: doomsday.votes,
+        color: "yellow",
+        highlight: "yellow",
+        label: "doomsday"
+    },
+    {
+        value: enter36.votes,
+        color: "purple",
+        highlight: "purple",
+        label: "enter36"
+    },
+    {
+        value: illmatic.votes,
+        color: "orange",
+        highlight: "orange",
+        label: "illmatic"
+    },
+    {
+        value: infamous.votes,
+        color: "#DEB887",
+        highlight: "#DEB887",
+        label: "infamous"
+    },
+    {
+        value: license.votes,
+        color: "#6495ED",
+        highlight: "#6495ED",
+        label: "license"
+    },
+    {
+        value: liquid.votes,
+        color: "#B8860B",
+        highlight: "#B8860B",
+        label: "liquid"
+    },
+    {
+        value: ready.votes,
+        color: "#006400",
+        highlight: "#006400",
+        label: "ready"
+    },
+    {
+        value: supreme.votes,
+        color: "#FF1493",
+        highlight: "#FF1493",
+        label: "supreme"
+    },
+    {
+        value: theChronic.votes,
+        color: "#696969",
+        highlight: "#696969",
+        label: "theChronic"
     },
 
 ];
@@ -145,8 +219,36 @@ var pieOptions = {
   segmentShowStroke : false,
   animateScale : true
 }
+var barData = {
+    labels: ["allEyez", "cap", "daily", "doomsday", "enter36", "illmatic", "infamous", "license", "liquid", "ready", "supreme", "theChronic"],
+    datasets: [
+        {
+            label: "My First dataset",
+            fillColor: "red",
+            strokeColor: "red",
+            highlightFill: "rgba(220,220,220,0.75)",
+            highlightStroke: "rgba(220,220,220,1)",
+            data: [allEyez.votes, cap.votes, daily.votes, doomsday.votes, enter36.votes, illmatic.votes, infamous.votes, license.votes, liquid.votes, ready.votes, supreme.votes, theChronic.votes]
+        },
+        // {
+        //     label: "My Second dataset",
+        //     fillColor: "green",
+        //     strokeColor: "green",
+        //     highlightFill: "rgba(151,187,205,0.75)",
+        //     highlightStroke: "rgba(151,187,205,1)",
+        //     data: [cap.votes]
+        // }
+    ]
+};
 
-var myNewChart = new Chart(ctx).Pie(data,pieOptions);
+var barOptions = {
+  barShowStroke : false,
+  animateScale : false
+}
+
+var myNewChart = new Chart(ctx2).Pie(data,pieOptions);
+// var myNewChart = new Chart(ctx).PolarArea(data,pieOptions);
+var myBarChart = new Chart(ctx).Bar(barData, barOptions);
 
 }
 
