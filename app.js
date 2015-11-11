@@ -28,11 +28,10 @@ var photoArray = [allEyez, cap, daily, doomsday, enter36, illmatic, infamous, li
 var tracker = function() {
 }
 
-//This Track method generates a random number to select an image from photoArray
+//This tracker method generates a random number to select an image from photoArray
 tracker.getRandomPhoto = function() {
     return Math.floor((Math.random() * 12) + 0);
   };
-
 
 //Declaring left and right cover images by tracker.prototype.getRandomPhoto() method.
 var leftCover = photoArray[tracker.getRandomPhoto()];
@@ -91,7 +90,6 @@ var newRapBattle = function () {
 
   while (leftCover === rightCover) {
     rightCover = photoArray[tracker.getRandomPhoto()];
-    // leftCover = photoArray[rapBattle.getRandomPhoto()];
   }
 
   var left1 = document.getElementById('left1');
@@ -114,7 +112,7 @@ first.addEventListener("click", tracker.leftWins); //If the left image is clicke
 second.addEventListener("click", tracker.rightWins); //If the left image is clicked it runs the leftWins method
 next.addEventListener("click", function() { // runs newRapBattle function and removes highlighting.
   newRapBattle();
-  document.getElementById("right1").removeAttribute('style');
+  document.getElementById("right1").removeAttribute('style');//removes border highlighting
   document.getElementById("left1").removeAttribute('style');
 });
 
