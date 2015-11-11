@@ -2,6 +2,22 @@ body {
   background-image: url("img/brickwall.jpg");
 }
 
+#pagetitle {
+font-family: 'Lateef', cursive;
+color: silver;
+background-color: black;
+opacity: 0.8;
+font-size: 44px;
+}
+
+#pagedescrip {
+font-family: 'Lateef', cursive;
+color: silver;
+background-color: black;
+opacity: 0.8;
+font-size: 44px;
+}
+
 #charts {
 
 }

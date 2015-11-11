@@ -1,35 +1,75 @@
 /*layout.css*/
+#heading{
+  display: flex;
+  justify-content: space-between;
+  width: 1200px;
+  margin: auto;
+
+}
 
 #pagetitle {
   display: flex;
   justify-content: center;
+  width: 425px;
+ /* margin: auto;*/
+}
+
+#pagedescrip {
+
+  display: flex;
+  justify-content: center;
+  width: 700px;
+  height: 64px;
+ /* margin: auto;*/
 }
 
 #votearea {
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
+  width: 900px;
+  margin: auto;
 
 }
 
 #votearea #leftButton {
   padding-left: 2%;
   padding-right: 2%;
+  background-color: black;
+  border: none;
+  outline: none;
+}
+
+#leftName {
+  color: silver;
+  font-family: 'Cinzel', serif;
+  font-size: 16px;
+
+}
+
+#rightName {
+  color: silver;
+  font-family: 'Cinzel', serif;
+  font-size: 16px;
 }
 
 #votearea #rightButton {
   padding-left: 2%;
   padding-right: 2%;
+  background-color: black;
+  border: none;
+  outline: none;
 }
 
 #audio {
   display: flex;
   justify-content: center;
+  padding-top: 1%;
 }
 
 #charts {
   display: flex;
   justify-content: center;
-  padding: 3%;
+  padding: 1%;
   width: 1000px;
   margin: auto;
 }

@@ -239,7 +239,7 @@ var barOptions = {
 }
 
 var myNewChart = new Chart(ctx2).Pie(data,pieOptions);
-// var myNewChart = new Chart(ctx).PolarArea(data,pieOptions);
+// var myNewChart = new Chart(ctx2).PolarArea(data,pieOptions);
 var myBarChart = new Chart(ctx).Bar(barData, barOptions, { scaleFontColor: "#00FFFF" });
 
 }
