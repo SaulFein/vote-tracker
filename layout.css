@@ -1,7 +1,37 @@
 /*layout.css*/
 
-#votearea {
+#pagetitle {
   display: flex;
   justify-content: center;
 }
+
+#votearea {
+  display: flex;
+  justify-content: center;
+
+}
+
+#votearea #leftButton {
+  padding-left: 2%;
+  padding-right: 2%;
+}
+
+#votearea #rightButton {
+  padding-left: 2%;
+  padding-right: 2%;
+}
+
+#audio {
+  display: flex;
+  justify-content: center;
+}
+
+#charts {
+  display: flex;
+  justify-content: center;
+  padding: 3%;
+  width: 1000px;
+  margin: auto;
+}
+
 

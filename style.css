@@ -1,5 +1,13 @@
-#nextbattle {
-  background-color: red;
-  height: 100px;
-  width: 100px;
+body {
+  background-image: url("img/brickwall.jpg");
+}
+
+#charts {
+
+}
+
+.chartback {
+background-color: black;
+opacity: 0.8;
+padding: 1%;
 }

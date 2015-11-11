@@ -92,8 +92,6 @@ var removeHL = function () {
   document.getElementById("left1").removeAttribute('style');
 }
 var newRapBattle = function () {
-
-
   leftCover = photoArray[tracker.getRandomPhoto()];
   rightCover = photoArray[tracker.getRandomPhoto()];
 
@@ -114,25 +112,12 @@ var newRapBattle = function () {
   console.log (leftCover);
   console.log (rightCover);
 
-
 }
 
 tracker.displayPhotos();
 
-// if (first.addEventListener("click")) {
-//   tracker.leftWins();
-// } else {
-//   second.addEventListener("click", tracker.rightWins);
-// }
-
-first.addEventListener("click", tracker.leftWins); //If the left image is clicked it runs the leftWins method
+first.addEventListener("click", tracker.leftWins);
 second.addEventListener("click", tracker.rightWins);
-
-//If the left image is clicked it runs the leftWins method
-// next.addEventListener("click", function() { // runs newRapBattle function and removes highlighting.
-//   newRapBattle ();
-
-// });
 
 //Chart section
 var displayChart = function() {
@@ -242,26 +227,20 @@ var barData = {
             highlightFill: "rgba(220,220,220,0.75)",
             highlightStroke: "rgba(220,220,220,1)",
             data: [allEyez.votes, cap.votes, daily.votes, doomsday.votes, enter36.votes, illmatic.votes, infamous.votes, license.votes, liquid.votes, ready.votes, supreme.votes, theChronic.votes]
-        },
-        // {
-        //     label: "My Second dataset",
-        //     fillColor: "green",
-        //     strokeColor: "green",
-        //     highlightFill: "rgba(151,187,205,0.75)",
-        //     highlightStroke: "rgba(151,187,205,1)",
-        //     data: [cap.votes]
-        // }
+        }
     ]
 };
 
 var barOptions = {
   barShowStroke : false,
-  animateScale : false
+  animateScale : false,
+  scaleFontColor: "white",
+  scaleLineColor: "white"
 }
 
 var myNewChart = new Chart(ctx2).Pie(data,pieOptions);
 // var myNewChart = new Chart(ctx).PolarArea(data,pieOptions);
-var myBarChart = new Chart(ctx).Bar(barData, barOptions);
+var myBarChart = new Chart(ctx).Bar(barData, barOptions, { scaleFontColor: "#00FFFF" });
 
 }
 
