@@ -108,6 +108,12 @@ var newRapBattle = function () {
 
 tracker.displayPhotos();
 
+// if (first.addEventListener("click")) {
+//   tracker.leftWins();
+// } else {
+//   second.addEventListener("click", tracker.rightWins);
+// }
+
 first.addEventListener("click", tracker.leftWins); //If the left image is clicked it runs the leftWins method
 second.addEventListener("click", tracker.rightWins); //If the left image is clicked it runs the leftWins method
 next.addEventListener("click", function() { // runs newRapBattle function and removes highlighting.
@@ -115,7 +121,6 @@ next.addEventListener("click", function() { // runs newRapBattle function and re
   document.getElementById("right1").removeAttribute('style');//removes border highlighting
   document.getElementById("left1").removeAttribute('style');
 });
-
 
 //Chart section
 var displayChart = function() {
