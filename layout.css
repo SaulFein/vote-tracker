@@ -2,4 +2,6 @@
 
 #votearea {
   display: flex;
+  justify-content: center;
 }
+
