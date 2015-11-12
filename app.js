@@ -78,6 +78,12 @@ tracker.leftWins = function(event) {
   setTimeout(removeHL, 600);
 }
 
+// refreshChart = function () {
+//   for (i = 0; i < photoArray.length; i++){
+
+//   }
+// }
+
 tracker.rightWins = function(event) {
   event.preventDefault();
   event.target.style.outline = "solid red 5px";
@@ -123,7 +129,7 @@ second.addEventListener("click", tracker.rightWins);
 var displayChart = function() {
 
 var ctx = document.getElementById("myChart").getContext("2d");
-var ctx2 = document.getElementById("myChart2").getContext("2d");
+
 
 var data = [
     // {
@@ -217,30 +223,8 @@ var pieOptions = {
   segmentShowStroke : false,
   animateScale : true
 }
-var barData = {
-    labels: ["allEyez", "cap", "daily", "doomsday", "enter36", "illmatic", "infamous", "license", "liquid", "ready", "supreme", "theChronic"],
-    datasets: [
-        {
-            label: "My First dataset",
-            fillColor: "red",
-            strokeColor: "red",
-            highlightFill: "rgba(220,220,220,0.75)",
-            highlightStroke: "rgba(220,220,220,1)",
-            data: [allEyez.votes, cap.votes, daily.votes, doomsday.votes, enter36.votes, illmatic.votes, infamous.votes, license.votes, liquid.votes, ready.votes, supreme.votes, theChronic.votes]
-        }
-    ]
-};
 
-var barOptions = {
-  barShowStroke : false,
-  animateScale : false,
-  scaleFontColor: "gold",
-  scaleLineColor: "gold"
-}
+var myNewChart = new Chart(ctx).Pie(data,pieOptions);
 
-var myNewChart = new Chart(ctx2).Pie(data,pieOptions);
-// var myNewChart = new Chart(ctx2).PolarArea(data,pieOptions);
-var myBarChart = new Chart(ctx).Bar(barData, barOptions, { scaleFontColor: "#00FFFF" });
 
 }
-
