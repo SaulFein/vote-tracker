@@ -74,8 +74,8 @@ tracker.leftWins = function(event) {
   leftCover.votes += 1; //This gives that cover 1 vote.
   console.log(leftCover.name + " has " + leftCover.votes + " votes.");
   displayChart();// redraws chart after votes have been incremented
-  setTimeout(newRapBattle, 700);
-  setTimeout(removeHL, 700);
+  setTimeout(newRapBattle, 600);
+  setTimeout(removeHL, 600);
 }
 
 tracker.rightWins = function(event) {
@@ -84,8 +84,8 @@ tracker.rightWins = function(event) {
   rightCover.votes += 1;
   console.log(rightCover.name + " has " + rightCover.votes + " votes.");
   displayChart();// redraws chart after votes have been incremented
-  setTimeout(newRapBattle, 700);
-  setTimeout(removeHL, 700);
+  setTimeout(newRapBattle, 600);
+  setTimeout(removeHL, 600);
 }
 var removeHL = function () {
   document.getElementById("right1").removeAttribute('style');//removes border highlighting
