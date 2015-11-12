@@ -1,9 +1,12 @@
 'use strict'
 
+var myNewChart;
+// var data;
+
 function Photo (name, path) { //object constructor for images
   this.name = name;
   this.path = path;
-  this.votes = 0;
+  this.votes = 1;
   // photoArray.push(this);
 }
 
@@ -73,30 +76,30 @@ tracker.leftWins = function(event) {
   event.target.style.outline = "solid blue 5px";//This adds a blue border to left cover if clicked
   leftCover.votes += 1; //This gives that cover 1 vote.
   console.log(leftCover.name + " has " + leftCover.votes + " votes.");
-  displayChart();// redraws chart after votes have been incremented
+  refreshChart();
+  // displayChart();// redraws chart after votes have been incremented
   setTimeout(newRapBattle, 600);
   setTimeout(removeHL, 600);
 }
 
-// refreshChart = function () {
-//   for (i = 0; i < photoArray.length; i++){
-
-//   }
-// }
 
 tracker.rightWins = function(event) {
   event.preventDefault();
   event.target.style.outline = "solid red 5px";
   rightCover.votes += 1;
   console.log(rightCover.name + " has " + rightCover.votes + " votes.");
-  displayChart();// redraws chart after votes have been incremented
+  refreshChart();
+  // displayChart();// redraws chart after votes have been incremented
   setTimeout(newRapBattle, 600);
   setTimeout(removeHL, 600);
 }
+
+
 var removeHL = function () {
   document.getElementById("right1").removeAttribute('style');//removes border highlighting
   document.getElementById("left1").removeAttribute('style');
 }
+
 var newRapBattle = function () {
   leftCover = photoArray[tracker.getRandomPhoto()];
   rightCover = photoArray[tracker.getRandomPhoto()];
@@ -126,24 +129,13 @@ first.addEventListener("click", tracker.leftWins);
 second.addEventListener("click", tracker.rightWins);
 
 //Chart section
-var displayChart = function() {
+// var displayChart = function() {
 
-var ctx = document.getElementById("myChart").getContext("2d");
+  var ctx = document.getElementById("myChart").getContext("2d");
 
 
-var data = [
-    // {
-    //     value: leftCover.votes,
-    //     color: "#46BFBD",
-    //     highlight: "#FF5A5E",
-    //     label: "Blue"
-    // },
-    // {
-    //     value: rightCover.votes,
-    //     color: "#F7464A",
-    //     highlight: "#5AD3D1",
-    //     label: "Red"
-    // },
+  var data = [
+
     {
         value: allEyez.votes,
         color: "red",
@@ -217,14 +209,22 @@ var data = [
         label: "theChronic"
     },
 
-];
+  ];
 
-var pieOptions = {
-  segmentShowStroke : false,
-  animateScale : true
+  var pieOptions = {
+    segmentShowStroke : false,
+    animateScale : true
+  }
+
+  var myNewChart = new Chart(ctx).Pie(data,pieOptions);
+
+// }
+
+var refreshChart = function () {
+  for (var i = 0; i < photoArray.length; i++){
+    myNewChart.segments[i].value = photoArray[i].votes;
+    myNewChart.update();
+  }
 }
 
-var myNewChart = new Chart(ctx).Pie(data,pieOptions);
-
-
-}
+// displayChart();
