@@ -1,31 +1,64 @@
-'use strict'
+'use strict' //scott help
 
 var myNewChart;
-// var data;
+var data;
+var photoArray = [];
 
-function Photo (name, path) { //object constructor for images
+function Photo (name, path, id) { //object constructor for images
   this.name = name;
   this.path = path;
-  this.votes = 1;
-  // photoArray.push(this);
+  this.id = id;
+  this.votes = 0;
+  photoArray.push(this);
 }
 
 //Creation of new Photo objects. One for each image.
-var allEyez = new Photo ("2Pac - All Eyes On Me", "img/alleyez.png");
-var cap = new Photo ("Big Pun - Capital Punishment", "img/cap.jpg");
-var daily = new Photo ("Gang Starr - Daily Operation", "img/daily.jpg");
-var doomsday = new Photo ("MF DOOM - DOOMSDAY", "img/doomsday.jpg");
-var enter36 = new Photo ("Wu-Tang Clan - Enter The Wu-Tang", "img/enter36.jpg");
-var illmatic = new Photo ("Nas - Illmatic", "img/illmatic.jpg");
-var infamous = new Photo ("Mobb Deep - The Infamous", "img/infamous.jpg");
-var license = new Photo ("Beastie Boys - License to Ill", "img/license.jpg");
-var liquid = new Photo ("GZA - Liquid Swords", "img/liquid.jpg");
-var ready = new Photo ("The Notorious BIG - Read to Die", "img/ready.jpg");
-var supreme = new Photo ("Ghostface Killah - Supreme Clientele", "img/supreme.jpg");
-var theChronic = new Photo ("Dr. Dre - The Chronic", "img/thechronic.jpg");
+localStorage.clear();
 
-//Putting each Photo object into an array
-var photoArray = [allEyez, cap, daily, doomsday, enter36, illmatic, infamous, license, liquid, ready, supreme, theChronic];
+function checkLocal(){
+  if (localStorage.chartData && localStorage.photoArray) {
+    // data = JSON.parse(localStorage.chartData);
+    // photoArray = JSON.parse(localStorage.getItem('photoArray'));
+    console.log('if');
+  } else {
+  //   var allEyez = new Photo ("2Pac - All Eyes On Me", "img/alleyez.png", "allEyez");
+  //   var cap = new Photo ("Big Pun - Capital Punishment", "img/cap.jpg", "cap");
+  //   var daily = new Photo ("Gang Starr - Daily Operation", "img/daily.jpg", "daily");
+  //   var doomsday = new Photo ("MF DOOM - DOOMSDAY", "img/doomsday.jpg", "doomsday");
+  //   var enter36 = new Photo ("Wu-Tang Clan - Enter The Wu-Tang", "img/enter36.jpg", "enter36");
+  //   var illmatic = new Photo ("Nas - Illmatic", "img/illmatic.jpg", "illmatic");
+  //   var infamous = new Photo ("Mobb Deep - The Infamous", "img/infamous.jpg", "infamous");
+  //   var license = new Photo ("Beastie Boys - License to Ill", "img/license.jpg", "license");
+  //   var liquid = new Photo ("GZA - Liquid Swords", "img/liquid.jpg", "liquid");
+  //   var ready = new Photo ("The Notorious BIG - Read to Die", "img/ready.jpg", "ready");
+  //   var supreme = new Photo ("Ghostface Killah - Supreme Clientele", "img/supreme.jpg", "supreme");
+  //   var theChronic = new Photo ("Dr. Dre - The Chronic", "img/thechronic.jpg", "theChronic");
+
+  //   data = {
+  //     labels: ["allEyez", "cap", "daily", "doomsday", "enter36", "illmatic", "infamous", "license", "liquid", "ready", "supreme", "theChronic"],
+  //     datasets: [
+  //       {
+  //         label: "My First dataset",
+  //         fillColor: "red",
+  //         strokeColor: "red",
+  //         highlightFill: "rgba(220,220,220,0.75)",
+  //         highlightStroke: "rgba(220,220,220,1)",
+  //         data: [0,0,0,0,0,0,0,0,0,0,0,0]
+  //       }
+  //     ]
+  //   };
+  // }
+
+  // //Putting each Photo object into an array
+  // // photoArray = [allEyez, cap, daily, doomsday, enter36, illmatic, infamous, license, liquid, ready, supreme, theChronic];
+
+  // localStorage.setItem('photoArray', JSON.stringify(photoArray));
+  console.log('else');
+  }
+}
+
+checkLocal();
+
 
 //Creating the tracker object
 var tracker = function() {
@@ -59,14 +92,14 @@ tracker.displayPhotos = function () {
   var leftPhoto = document.createElement('img');
   var leftTitle = document.getElementById('leftName');
   leftPhoto.src = leftCover.path;
-  leftPhoto.id = 'left1';
+  leftPhoto.id = leftCover.id;
   first.appendChild(leftPhoto);
   leftTitle.innerHTML = leftCover.name;
 
   var rightPhoto = document.createElement('img');
   var rightTitle = document.getElementById('rightName');
   rightPhoto.src = rightCover.path;
-  rightPhoto.id = 'right1';
+  rightPhoto.id = rightCover.id;
   second.appendChild(rightPhoto);
   rightTitle.innerHTML = rightCover.name;
 }
@@ -77,6 +110,7 @@ tracker.leftWins = function(event) {
   leftCover.votes += 1; //This gives that cover 1 vote.
   console.log(leftCover.name + " has " + leftCover.votes + " votes.");
   refreshChart();
+  localStorage.setItem('chartData', JSON.stringify(data));
   // displayChart();// redraws chart after votes have been incremented
   setTimeout(newRapBattle, 600);
   setTimeout(removeHL, 600);
@@ -89,6 +123,7 @@ tracker.rightWins = function(event) {
   rightCover.votes += 1;
   console.log(rightCover.name + " has " + rightCover.votes + " votes.");
   refreshChart();
+  localStorage.setItem('chartData', JSON.stringify(data));
   // displayChart();// redraws chart after votes have been incremented
   setTimeout(newRapBattle, 600);
   setTimeout(removeHL, 600);
@@ -134,97 +169,46 @@ second.addEventListener("click", tracker.rightWins);
   var ctx = document.getElementById("myChart").getContext("2d");
 
 
-  var data = [
 
-    {
-        value: allEyez.votes,
-        color: "red",
-        highlight: "red",
-        label: "allEyez"
-    },
-    {
-        value: cap.votes,
-        color: "blue",
-        highlight: "blue",
-        label: "cap"
-    },
-    {
-        value: daily.votes,
-        color: "green",
-        highlight: "green",
-        label: "daily"
-    },
-    {
-        value: doomsday.votes,
-        color: "yellow",
-        highlight: "yellow",
-        label: "doomsday"
-    },
-    {
-        value: enter36.votes,
-        color: "purple",
-        highlight: "purple",
-        label: "enter36"
-    },
-    {
-        value: illmatic.votes,
-        color: "orange",
-        highlight: "orange",
-        label: "illmatic"
-    },
-    {
-        value: infamous.votes,
-        color: "#DEB887",
-        highlight: "#DEB887",
-        label: "infamous"
-    },
-    {
-        value: license.votes,
-        color: "#6495ED",
-        highlight: "#6495ED",
-        label: "license"
-    },
-    {
-        value: liquid.votes,
-        color: "#B8860B",
-        highlight: "#B8860B",
-        label: "liquid"
-    },
-    {
-        value: ready.votes,
-        color: "#006400",
-        highlight: "#006400",
-        label: "ready"
-    },
-    {
-        value: supreme.votes,
-        color: "#FF1493",
-        highlight: "#FF1493",
-        label: "supreme"
-    },
-    {
-        value: theChronic.votes,
-        color: "#696969",
-        highlight: "#696969",
-        label: "theChronic"
-    },
 
-  ];
+  var barOptions = {
+      barShowStroke : false,
+      animateScale : false,
+      scaleFontColor: "gold",
+      scaleLineColor: "gold"
+    }
 
-  var pieOptions = {
-    segmentShowStroke : false,
-    animateScale : true
-  }
-
-  var myNewChart = new Chart(ctx).Pie(data,pieOptions);
+  var myNewChart = new Chart(ctx).Bar(data, barOptions, { scaleFontColor: "#00FFFF" })
 
 // }
 
-var refreshChart = function () {
-  for (var i = 0; i < photoArray.length; i++){
-    myNewChart.segments[i].value = photoArray[i].votes;
+var refreshChart = function (id) {
+  for (var i in photoArray){
+    if(photoArray[i].id === id) {
+      myNewChart.datasets[0].bars[i].value = photoArray[i].votes;
+      data.datasets[0].data[i] = photoArray[i].votes;
+    }
+    // myNewChart.segments[i].value = photoArray[i].votes;
+    // myNewChart.update();
     myNewChart.update();
   }
 }
 
+
+
+
+
+
+
 // displayChart();
+
+
+
+
+
+
+
+
+
+
+
