@@ -1,7 +1,7 @@
 var data;
 var images = [];
-var files = ['alleyez', 'cap', 'daily', 'doomsday', 'enter36', 'illmatic', 'infamous', 'license', 'liquid', 'ready', 'supreme'];
-var titles = ['2Pac - All Eyez On Me', 'Big Pun - Capital Punishment', 'Gang Starr - Daily Operation', 'MF DOOM - DOOMSDAY', 'Wu-Tang Clan - Enter The Wu-Tang', 'Nas - Illmatic', 'Mobb Deep - The Infamous', 'Beastie Boys - Licence To Ill', 'GZA - Liquid Swords', 'The Notorious BIG - Ready to Die', 'Ghostface Killah - Supreme Clientele'];
+var files = ['alleyez', 'cap', 'daily', 'doomsday', 'enter36', 'illmatic', 'infamous', 'license', 'liquid', 'ready', 'supreme', 'thechronic'];
+var titles = ['2Pac - All Eyez On Me', 'Big Pun - Capital Punishment', 'Gang Starr - Daily Operation', 'MF DOOM - DOOMSDAY', 'Wu-Tang Clan - Enter The Wu-Tang', 'Nas - Illmatic', 'Mobb Deep - The Infamous', 'Beastie Boys - Licence To Ill', 'GZA - Liquid Swords', 'The Notorious BIG - Ready to Die', 'Ghostface Killah - Supreme Clientele', 'Dr. Dre - The Chronic'];
 
 function Photo(name, path, title) {
   this.name = name;
