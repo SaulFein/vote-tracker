@@ -76,7 +76,7 @@ var tracker = {
   vote: function(id) {
     for (var i in images) {
       if (images[i].name === id) {
-        images[i].votes ++;
+        images[i].votes += 1;
         data.datasets[0].data[i] = images[i].votes;
         chart.datasets[0].bars[i].value = images[i].votes;
         console.log(images[i].title + " has " + images[i].votes + " votes.");
