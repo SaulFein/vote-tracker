@@ -7,7 +7,7 @@ function Photo(name, path, title) {
   this.name = name;
   this.path = path;
   this.title = title;
-  this.votes = 1;
+  this.votes = 0;
   data.labels.push(name);
   data.datasets[0].data.push(0);
   images.push(this);
@@ -78,6 +78,7 @@ var tracker = {
         images[i].votes += 1;
         data.datasets[0].data[i] = images[i].votes;
         chart.datasets[0].bars[i].value = images[i].votes;
+        console.log(images[i].title + " has " + images[i].votes + " votes.");
       }
     }
     localStorage.setItem('chartData', JSON.stringify(data)); // This line is new
@@ -97,8 +98,8 @@ var removeHL = function () {
   document.getElementById(tracker.rightCovEl.id).removeAttribute('style');
   }
 }
-var leftButton = document.getElementById('leftButton');
-leftButton.addEventListener('click', function(event) {
+var leftPhoto = document.getElementById('leftPhoto');
+leftPhoto.addEventListener('click', function(event) {
     tracker.vote(event.target.id);
     event.target.style.outline = "solid gold 5px";
     setTimeout(tracker.getRandomImg, 600);
@@ -106,15 +107,13 @@ leftButton.addEventListener('click', function(event) {
     chart.update();
 })
 
-var rightButton = document.getElementById('rightButton');
-rightButton.addEventListener('click', function(event) {
+var rightPhoto = document.getElementById('rightPhoto');
+rightPhoto.addEventListener('click', function(event) {
     tracker.vote(event.target.id);
     event.target.style.outline = "solid gold 5px";
     setTimeout(tracker.getRandomImg, 600);
     setTimeout(removeHL, 600);
     chart.update();
 })
-
-
 
 tracker.getRandomImg();
