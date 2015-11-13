@@ -23,8 +23,8 @@ function createPhoto() {
 
 function checkLocal() {
   if (localStorage.chartData && localStorage.images) {
-    data = JSON.parse(localStorage.chartData);
     images = JSON.parse(localStorage.getItem('images'));
+    data = JSON.parse(localStorage.chartData);
   } else {
     data = {
       labels: [],
@@ -41,7 +41,8 @@ function checkLocal() {
     };
     createPhoto();
   }
-} checkLocal();
+}
+checkLocal();
 
 var tracker = {
   left: '',
@@ -75,13 +76,14 @@ var tracker = {
   vote: function(id) {
     for (var i in images) {
       if (images[i].name === id) {
-        images[i].votes += 1;
+        images[i].votes ++;
         data.datasets[0].data[i] = images[i].votes;
         chart.datasets[0].bars[i].value = images[i].votes;
         console.log(images[i].title + " has " + images[i].votes + " votes.");
       }
     }
     localStorage.setItem('chartData', JSON.stringify(data));
+    localStorage.setItem('images', JSON.stringify(images));
   }
 }
 
@@ -98,6 +100,7 @@ var removeHL = function () {
   document.getElementById(tracker.rightCovEl.id).removeAttribute('style');
   }
 }
+
 var leftPhoto = document.getElementById('leftPhoto');
 leftPhoto.addEventListener('click', function(event) {
     tracker.vote(event.target.id);
@@ -117,3 +120,5 @@ rightPhoto.addEventListener('click', function(event) {
 })
 
 tracker.getRandomImg();
+
+
