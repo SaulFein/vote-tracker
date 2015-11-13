@@ -18,12 +18,12 @@ function createPhoto() {
     var filePath = 'img/' + files[i] + '.jpg';
     new Photo(files[i], filePath, titles[i]);
   }
-  localStorage.setItem('images', JSON.stringify(images)); // This line is new
+  localStorage.setItem('images', JSON.stringify(images));
 }
 
-function checkLocal() { // This function wrapper is new, and some content
+function checkLocal() {
   if (localStorage.chartData && localStorage.images) {
-    data = JSON.parse(localStorage.chartData); // line 24 and 25 are two different ways to get data from Local Storage
+    data = JSON.parse(localStorage.chartData);
     images = JSON.parse(localStorage.getItem('images'));
   } else {
     data = {
@@ -81,7 +81,7 @@ var tracker = {
         console.log(images[i].title + " has " + images[i].votes + " votes.");
       }
     }
-    localStorage.setItem('chartData', JSON.stringify(data)); // This line is new
+    localStorage.setItem('chartData', JSON.stringify(data));
   }
 }
 
