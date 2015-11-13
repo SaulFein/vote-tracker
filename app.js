@@ -1,10 +1,12 @@
 var data;
 var images = [];
 var files = ['alleyez', 'cap', 'daily', 'doomsday', 'enter36', 'illmatic', 'infamous', 'license', 'liquid', 'ready', 'supreme', 'theChronic'];
+var titles = ['2Pac - All Eyez On Me', 'Big Pun - Capital Punishment', 'Gang Starr - Daily Operation', 'MF DOOM - DOOMSDAY', 'Wu-Tang Clan - Enter The Wu-Tang', 'Nas - Illmatic', 'Mobb Deep - The Infamous', 'Beastie Boys - Licence To Ill', 'GZA - Liquid Swords', 'The Notorious BIG - Ready to Die', 'Ghostface Killah - Supreme Clientele', 'Dr. Dre - The Chronic'];
 
-function Photo(name, path) {
+function Photo(name, path, title) {
   this.name = name;
   this.path = path;
+  this.title = title;
   this.votes = 1;
   data.labels.push(name);
   data.datasets[0].data.push(0);
@@ -14,7 +16,7 @@ function Photo(name, path) {
 function createPhoto() {
   for (var i = 0; i < files.length; i++) {
     var filePath = 'img/' + files[i] + '.jpg';
-    new Photo(files[i], filePath);
+    new Photo(files[i], filePath, titles[i]);
   }
   localStorage.setItem('images', JSON.stringify(images)); // This line is new
 }
@@ -29,10 +31,10 @@ function checkLocal() { // This function wrapper is new, and some content
       datasets: [
         {
           label: 'rap albums',
-          fillColor: "rgba(25, 207, 205, 0.5)",
-          strokeColor: "rgba(25, 207, 205, 0.8)",
-          highlightFill: "rgba(25, 207, 205, 0.75)",
-          highlightStroke: "rgba(25, 207, 20 5, 1)",
+          fillColor: "red",
+          strokeColor: "red",
+          highlightFill: "red",
+          highlightStroke: "red",
           data: []
         }
       ]
@@ -63,11 +65,11 @@ var tracker = {
 
     tracker.leftCovEl.src = tracker.left.path;
     tracker.leftCovEl.id = tracker.left.name;
-    tracker.leftCaption.textContent = tracker.left.name;
+    tracker.leftCaption.textContent = tracker.left.title;
 
     tracker.rightCovEl.src = tracker.right.path;
     tracker.rightCovEl.id = tracker.right.name;
-    tracker.rightCaption.textContent = tracker.right.name;
+    tracker.rightCaption.textContent = tracker.right.title;
   },
 
   vote: function(id) {
@@ -96,18 +98,18 @@ var removeHL = function () {
   }
 }
 var leftButton = document.getElementById('leftButton');
-votearea.addEventListener('click', function(event) {
+leftButton.addEventListener('click', function(event) {
     tracker.vote(event.target.id);
-    event.target.style.outline = "solid red 5px";
+    event.target.style.outline = "solid gold 5px";
     setTimeout(tracker.getRandomImg, 600);
     setTimeout(removeHL, 600);
     chart.update();
 })
 
 var rightButton = document.getElementById('rightButton');
-votearea.addEventListener('click', function(event) {
+rightButton.addEventListener('click', function(event) {
     tracker.vote(event.target.id);
-    event.target.style.outline = "solid blue 5px";
+    event.target.style.outline = "solid gold 5px";
     setTimeout(tracker.getRandomImg, 600);
     setTimeout(removeHL, 600);
     chart.update();
